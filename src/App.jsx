@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './components/Navbar'
+import ImgCarousel from './components/ImgCarousel';
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
   return (
     <>
       <Navbar/>
+      <ImgCarousel/>
     </>
   )
 }

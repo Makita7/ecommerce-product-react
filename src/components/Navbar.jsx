@@ -54,11 +54,10 @@ import styled from 'styled-components';
                 { isCartToggle &&
                     <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
                         <ModalStyle className='py-2 px-3'>
+                            <div>
+                                <button onClick={toggleMenu} type="button" class="btn-close" aria-label="Close"/>
+                            </div>
                             hi there
-                            <ModalActions>
-                                <button onClick={toggleMenu} className='btn mx-1' type='button' >close</button>
-                                <button onClick={toggleMenu} className='btn btn-primary ms-1' type='button' >close</button>
-                            </ModalActions>
                         </ModalStyle>
                     </OverlayStyle>
                 }
@@ -89,13 +88,22 @@ const OverlayStyle = styled.div`
     z-index: 1000;
 `;
 
-const ModalStyle = styled.div`
+const ModalStyleCenter = styled.div`
     position: absolute;
     box-shadow: 0px 7px 8px #00000052;
     width: 80%;
     height: 50%;
     background: white;
     border-radius: 1rem;
+`;
+const ModalStyle = styled.div`
+    position: absolute;
+    box-shadow: 0px 7px 8px #00000052;
+    width: 70%;
+    height: 100%;
+    background: white;
+    left: 0;
+    top: 0;
 `;
 
 const ModalActions = styled.div`
