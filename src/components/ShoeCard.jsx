@@ -39,7 +39,8 @@ export default function ShoeCard() {
                     <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={increment}>+</Button>
                 </div>
                 <Button variant='primary' style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold",}} className='my-2' >
-                    <FaCartPlus className='me-2' style={{fontSize: "1.5rem"}}/>
+                    {/* <FaCartPlus className='me-2' style={{fontSize: "1.5rem"}}/> */}
+                    <img src='' alt='' />
                     Add to Cart
                 </Button>
             </div>
