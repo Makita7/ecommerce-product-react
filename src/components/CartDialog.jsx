@@ -5,12 +5,15 @@ import closeIcon from '../assets/icon-close.svg';
 import { OverlayStyle } from "./Navbar";
 import { Button } from 'react-bootstrap';
 import { useShopStore } from "../store/store";
+import DeleteIcon from "../assets/icon-delete.svg";
+import thumbnail from "../assets/image-product-1-thumbnail.jpg";
 
 
 export default function CartDialog() {
 
     const [isCartToggle, setIsCartToggle] = useState(false);
     const cart = useShopStore((state) => state.cart);
+    const products = useShopStore((state) => state.products);
 
     const ToggleCart = () => setIsCartToggle(!isCartToggle);
 
@@ -30,12 +33,21 @@ export default function CartDialog() {
                             <img onClick={ToggleCart} src={closeIcon} alt='navbar close button' aria-label='close button' style={{width: "1.2rem"}} className='ms-2' />
                         </div>
                         <div style={{minHeight: "5rem",}}>
+                            <hr className="my-2 mb-3" />
                             { cart
                                 ? cart.map((cart, index) => (
                                 <p key={index}>{cart}</p>
                                 ))
                                 : <p>Cart is empty...</p>
                             }
+                            <div className="d-flex align-items-center mb-3" >
+                                <Thumnail src={thumbnail} alt="cart shoe profile photo" />
+                                <div className="ms-2" style={{width: "100%"}}>
+                                    <p className="mb-0" style={{color: "var(--dark-grayish-blue),"}}>Title</p>
+                                    <p className="mb-0" style={{color: "var(--dark-grayish-blue),"}}>$ Price x Amount = <b>$ Total</b></p>
+                                </div>
+                                <img src={DeleteIcon} alt="delete icon for product: " />
+                            </div>
                         </div>
                         <Button onClick={Checkout} variant='primary' style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold",}} className='my-2' >
                             Checkout
@@ -57,4 +69,9 @@ const CartDialogStyle = styled.div`
     top: 3%;
     left: 5%;
     border-radius: 8px;
+`
+
+const Thumnail = styled.img`
+    width: 3rem;
+    border-radius: 4px;
 `

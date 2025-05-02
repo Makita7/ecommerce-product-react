@@ -5,8 +5,6 @@ import { useShopStore } from './store/store';
 
 
 function App() {
-
-  const cart = useShopStore((state) => state.cart)
   const products = useShopStore((state) => state.products);
 
   return (

@@ -13,6 +13,7 @@ export default function ImgCarousel() {
 
     return (
     <Carousel
+        interval={4000}
         prevIcon={<FaArrowLeft className="custom-prev-icon" />}
         nextIcon={<FaArrowRight className="custom-next-icon" />}
     >
