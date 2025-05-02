@@ -33,7 +33,7 @@ import styled from 'styled-components';
 
         return (
             <>
-                <nav className='d-flex align-items-center justify-content-between navbar m-4 m-lg-0'>
+                <nav className='d-flex align-items-center justify-content-between navbar mx-4 my-2 mx-lg-0 my-lg-0'>
                     <div className='d-flex align-items-center'>
                         { isMobile && <MenuIcon onClick={toggleMenu} src={NavBurgerIcon} alt='navigation menu button' className='me-2' /> }
 
