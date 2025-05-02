@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import ImgCarousel from './ImgCarousel';
 import styled from 'styled-components';
-import { FaCartPlus } from 'react-icons/fa';
 
 export default function ShoeCard() {
 
@@ -15,7 +14,11 @@ export default function ShoeCard() {
 
     const [amount, setAmount] = React.useState(0);
 
-    const decrement = () => setAmount(amount - 1);
+    const decrement = () => {
+        if(amount > 0){
+            setAmount(amount - 1)
+        }
+    };
     const increment = () => setAmount(amount + 1);
 
     return (

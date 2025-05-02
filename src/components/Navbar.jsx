@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../assets/logo.svg';
-import ProfileIcon from '../assets/image-avatar.png';
-import CartIcon from '../assets/icon-cart.svg';
 import NavBurgerIcon from '../assets/icon-menu.svg';
 import styled from 'styled-components';
 import closeIcon from '../assets/icon-close.svg';
+import ProfileIcon from '../assets/image-avatar.png';
+import CartDialog from './CartDialog';
 
 
     const NavbarItem = (name, index) =>{
@@ -24,10 +24,9 @@ import closeIcon from '../assets/icon-close.svg';
         const links = ['Collections', 'Men', 'Women', 'About', 'Contact'];
         const [isMobile, setIsMobile] = useState(false);
 
-        let [isCartToggle, setIsCartToggle] = useState(false);
+        let [SideNavToggle, setSideNavToggle] = useState(false);
         const toggleMenu = () => {
-            setIsCartToggle(!isCartToggle);
-            console.log(isCartToggle);
+            setSideNavToggle(!SideNavToggle);
         }
 
         useEffect(() => {
@@ -54,12 +53,12 @@ import closeIcon from '../assets/icon-close.svg';
                     </div>
 
                     <div className='d-flex align-items-end'>
-                        <img src={CartIcon} style={{margin: "auto"}} alt='shopping cart button' />
+                        <CartDialog/>
                         <ProfilePhoto src={ProfileIcon} alt='user profile mini photo' className='ms-4 pt-lg-2' />
                     </div>
                 </nav>
 
-                { isCartToggle &&
+                { SideNavToggle &&
                     <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
                         <ModalStyle className='py-2 px-3'>
                             <div className=' mt-2 mb-4'>
@@ -89,10 +88,11 @@ const ProfilePhoto = styled.img`
     }
 `;
 
-const OverlayStyle = styled.div`
+export const OverlayStyle = styled.div`
     background-color: #4d4d4d85;
     height: 100%;
     top: 0;
+    left: 0;
     position: fixed;
     width: 100%;
     z-index: 1000;
@@ -106,7 +106,7 @@ const ModalStyleCenter = styled.div`
     background: white;
     border-radius: 1rem;
 `;
-const ModalStyle = styled.div`
+export const ModalStyle = styled.div`
     position: absolute;
     box-shadow: 0px 7px 8px #00000052;
     width: 70%;
