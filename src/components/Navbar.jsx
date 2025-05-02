@@ -4,16 +4,24 @@ import ProfileIcon from '../assets/image-avatar.png';
 import CartIcon from '../assets/icon-cart.svg';
 import NavBurgerIcon from '../assets/icon-menu.svg';
 import styled from 'styled-components';
+import closeIcon from '../assets/icon-close.svg';
+
 
     const NavbarItem = (name, index) =>{
         return(
-            <p className='ps-2 mb-0' key={index} >{name}</p>
+            <p className='ps-2 mb-0' style={{color: "var(--very-dark-blue)"}} key={index} >{name}</p>
+        )
+    }
+
+    const NavbarItemMobile = (name, index) =>{
+        return(
+            <MobileNavLinks className='ps-2 mx-1' style={{color: "var(--very-dark-blue)"}} key={index} >{name}</MobileNavLinks>
         )
     }
 
 
     const Navbar = () => {
-        const links = ['Collections', 'menubar', 'Women', 'About', 'Contact'];
+        const links = ['Collections', 'Men', 'Women', 'About', 'Contact'];
         const [isMobile, setIsMobile] = useState(false);
 
         let [isCartToggle, setIsCartToggle] = useState(false);
@@ -46,7 +54,7 @@ import styled from 'styled-components';
                     </div>
 
                     <div className='d-flex align-items-end'>
-                        <img src={CartIcon} alt='shopping cart button' />
+                        <img src={CartIcon} style={{margin: "auto"}} alt='shopping cart button' />
                         <ProfilePhoto src={ProfileIcon} alt='user profile mini photo' className='ms-4 pt-lg-2' />
                     </div>
                 </nav>
@@ -54,10 +62,12 @@ import styled from 'styled-components';
                 { isCartToggle &&
                     <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
                         <ModalStyle className='py-2 px-3'>
-                            <div>
-                                <button onClick={toggleMenu} type="button" class="btn-close" aria-label="Close"/>
+                            <div className=' mt-2 mb-4'>
+                                <img onClick={toggleMenu} src={closeIcon} alt='navbar close button' aria-label='close button' style={{width: "1.2rem"}} className='ms-2' />
                             </div>
-                            hi there
+                            { links.map((title, index) => (
+                                NavbarItemMobile(title, index)
+                            ))}
                         </ModalStyle>
                     </OverlayStyle>
                 }
@@ -111,4 +121,11 @@ const ModalActions = styled.div`
     bottom: 0;
     position: absolute;
     right: 0;
+`
+
+const MobileNavLinks = styled.p`
+    color: var(--very-dark-blue);
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: capitalize;
 `
