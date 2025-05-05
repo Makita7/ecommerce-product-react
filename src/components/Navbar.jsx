@@ -1,42 +1,53 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import Logo from '../assets/logo.svg';
 import NavBurgerIcon from '../assets/icon-menu.svg';
-import styled from 'styled-components';
 import closeIcon from '../assets/icon-close.svg';
 import ProfileIcon from '../assets/image-avatar.png';
 import CartDialog from './CartDialog';
 
 
-    const NavbarItem = (name, index) =>{
-        return(
-            <p className='ps-2 mb-0' style={{color: "var(--very-dark-blue)"}} key={index} >{name}</p>
-        )
+
+const Navbar = () => {
+    const links = [
+        { name:'Collections', path:'/' },
+        { name:'Men', path:'/men' },
+        { name:'Women', path:'/women' },
+        { name:'About', path:'/about' },
+        { name:'Contact', path:'/contact' }
+    ];
+    const [isMobile, setIsMobile] = useState(false);
+
+    let [SideNavToggle, setSideNavToggle] = useState(false);
+    const toggleMenu = () => {
+        setSideNavToggle(!SideNavToggle);
     }
 
-    const NavbarItemMobile = (name, index) =>{
-        return(
-            <MobileNavLinks className='ps-2 mx-1' style={{color: "var(--very-dark-blue)"}} key={index} >{name}</MobileNavLinks>
-        )
-    }
-
-
-    const Navbar = () => {
-        const links = ['Collections', 'Men', 'Women', 'About', 'Contact'];
-        const [isMobile, setIsMobile] = useState(false);
-
-        let [SideNavToggle, setSideNavToggle] = useState(false);
-        const toggleMenu = () => {
-            setSideNavToggle(!SideNavToggle);
+    useEffect(() => {
+        const checkScreen = () => {
+            setIsMobile(window.innerWidth < 768);
         }
+        checkScreen();
+        window.addEventListener('resizes', checkScreen);
 
-        useEffect(() => {
-            const checkScreen = () => {
-                setIsMobile(window.innerWidth < 768);
-            }
-            checkScreen();
-            window.addEventListener('resizes', checkScreen);
+    }, []);
 
-        }, []);
+    const NavbarItem = (link, index) =>{
+        return(
+            <Link to={link.path || '/'} key={index} className='text-decoration-none'>
+                <p className='ps-2 mb-0' style={{color: "var(--very-dark-blue)"}} key={index} >{link.name}</p>
+            </Link>
+        )
+    }
+
+    const NavbarItemMobile = (link, index) =>{
+        return(
+            <Link to={link.path || '/'} key={index} onClick={toggleMenu} className='text-decoration-none'>
+                <MobileNavLinks className='ps-2 mx-1' style={{color: "var(--very-dark-blue)"}} >{link.name}</MobileNavLinks>
+            </Link>
+        )
+    }
 
         return (
             <>
@@ -46,8 +57,8 @@ import CartDialog from './CartDialog';
 
                         <img src={Logo} alt='sneakers store logo' className='ms-2 m-lg-0' />
                         <div className='d-flex align-items-center ms-2'>
-                            { !isMobile && links.map((title, index) => (
-                                NavbarItem(title, index)
+                            { !isMobile && links.map((link, index) => (
+                                NavbarItem(link, index)
                             ))}
                         </div>
                     </div>
@@ -64,8 +75,8 @@ import CartDialog from './CartDialog';
                             <div className=' mt-2 mb-4'>
                                 <img onClick={toggleMenu} src={closeIcon} alt='navbar close button' aria-label='close button' style={{width: "1.2rem"}} className='ms-2' />
                             </div>
-                            { links.map((title, index) => (
-                                NavbarItemMobile(title, index)
+                            { links.map((link, index) => (
+                                NavbarItemMobile(link, index)
                             ))}
                         </ModalStyle>
                     </OverlayStyle>
