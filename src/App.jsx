@@ -1,23 +1,29 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Routes, Route, BrowserRouter  } from 'react-router-dom';
 import Navbar from './components/Navbar'
-import CollectionCard from './components/CollectionCard';
-import { useShopStore } from './store/store';
-import { BrowserRouter } from 'react-router';
+import CollectionsPage from './pages/CollectionsPage';
+import MenPage from './pages/MenPage';
+import WomenPage from './pages/WomenPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 
 
 function App() {
-  const products = useShopStore((state) => state.products);
 
   return (
-    <React.StrictMode>
-      <Navbar/>
+    <>
       <BrowserRouter>
-        {products.map((product, index) => (
-          <CollectionCard key={index} name={product.name} price={product.price} img={product.photos[0]} data={product} />
-        ))}
+        <Navbar/>
+        <Routes >
+          <Route path="/" element={<CollectionsPage />} />
+          <Route path='men' element={<MenPage />} />
+          <Route path='/women' element={<WomenPage />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/contact' element={<ContactPage />} />
+        </Routes>
       </BrowserRouter>
-    </React.StrictMode>
+    </>
   )
 }
 
