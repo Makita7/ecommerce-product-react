@@ -31,3 +31,10 @@ export const useShopStore = create<ShopState>(() => ({
     cart: [],
     string: "string store",
 }))
+
+export const PriceFormatter = (price:number) => {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    }).format(price);
+}

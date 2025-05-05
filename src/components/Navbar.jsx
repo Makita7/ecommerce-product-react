@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router';
 import Logo from '../assets/logo.svg';
 import NavBurgerIcon from '../assets/icon-menu.svg';
 import styled from 'styled-components';
@@ -7,9 +8,11 @@ import ProfileIcon from '../assets/image-avatar.png';
 import CartDialog from './CartDialog';
 
 
-    const NavbarItem = (name, index) =>{
+    const NavbarItem = (name, index, path) =>{
         return(
-            <p className='ps-2 mb-0' style={{color: "var(--very-dark-blue)"}} key={index} >{name}</p>
+            <Route path={path} key={index}>
+                <p className='ps-2 mb-0' style={{color: "var(--very-dark-blue)"}} >{name}</p>
+            </Route>
         )
     }
 
@@ -64,9 +67,11 @@ import CartDialog from './CartDialog';
                             <div className=' mt-2 mb-4'>
                                 <img onClick={toggleMenu} src={closeIcon} alt='navbar close button' aria-label='close button' style={{width: "1.2rem"}} className='ms-2' />
                             </div>
-                            { links.map((title, index) => (
-                                NavbarItemMobile(title, index)
-                            ))}
+                            <Routes>
+                                { links.map((title, index) => (
+                                    NavbarItemMobile(title, index, '/')
+                                ))}
+                            </Routes>
                         </ModalStyle>
                     </OverlayStyle>
                 }
