@@ -8,7 +8,7 @@ export default function CollectionsPage() {
     return (
         <>
             {products.map((product, index) => (
-                <CollectionCard key={index} name={product.name} price={product.price} id={product.id} />
+                <CollectionCard key={index} name={product.name} price={product.price} id={product.id} img={product.photos} />
             ))}
         </>
     )

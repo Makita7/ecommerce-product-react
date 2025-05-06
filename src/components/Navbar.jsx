@@ -55,7 +55,9 @@ const Navbar = () => {
                     <div className='d-flex align-items-center'>
                         { isMobile && <MenuIcon onClick={toggleMenu} src={NavBurgerIcon} alt='navigation menu button' className='me-2' /> }
 
-                        <img src={Logo} alt='sneakers store logo' className='ms-2 m-lg-0' />
+                        <Link to='/' className='text-decoration-none'>
+                            <img src={Logo} alt='sneakers store logo' className='ms-2 m-lg-0' />
+                        </Link>
                         <div className='d-flex align-items-center ms-2'>
                             { !isMobile && links.map((link, index) => (
                                 NavbarItem(link, index)
