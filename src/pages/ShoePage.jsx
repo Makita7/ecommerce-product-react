@@ -46,9 +46,10 @@ export default function ShoePage() {
                     <div className="d-flex justify-content-between mb-4 mt-2 align-items-center">
                         <div className='d-flex align-items-center'>
                             <Price className='me-4 mb-0'>{PriceFormatter(product.price)}</Price>
-                            <Discount>{product.discount}%</Discount>
+                            { product.discount > 0 && <Discount>{product.discount}%</Discount>}
                         </div>
-                        <AmountDiscounted>{PriceFormatter(getDiscountedAmount(product.price,product.discount))}</AmountDiscounted>
+                        { product.discount > 0 && <AmountDiscounted>{PriceFormatter(getDiscountedAmount(product.price,product.discount))}</AmountDiscounted>}
+                        <StockAmount>Stock: {product.stock}</StockAmount>
                     </div>
 
                     <div className='d-flex align-items-center justify-content-between mb-2' style={{backgroundColor: '#f7f8fd'}}>
@@ -99,6 +100,12 @@ const Discount = styled.div`
 const AmountDiscounted = styled.p`
     margin: 0;
     text-decoration: line-through;
+    font-weight: bold;
+    color: var(--dark-grayish-blue);
+`
+
+export const StockAmount = styled.p`
+    margin: 0;
     font-weight: bold;
     color: var(--dark-grayish-blue);
 `

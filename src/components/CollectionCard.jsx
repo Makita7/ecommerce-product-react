@@ -3,16 +3,20 @@ import { PriceFormatter } from "../store/store";
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { StockAmount } from "../pages/ShoePage";
 
-export default function CollectionCard({name, price, id, img}) {
+export default function CollectionCard({name, price, stock, id, img}) {
 
     return (
         <Link to={`/product/${id}`} className='text-decoration-none' style={{color: "var(--very-dark-blue)"}} >
             <Card className="" >
                 { img && <img src={img[0]} alt='shoe name' style={{width: "100%", borderRadius: "8px"}} className="m-1" />}
                 <div className="ms-2 d-flex" style={{width: "100%"}}>
-                    <Title className="mb-0" style={{color: "var(--dark-grayish-blue),"}}>{name}</Title>
-                    <Price className="mb-0">{PriceFormatter(price)}</Price>
+                    <Title className="mb-0" style={{color: "var(--dark-grayish-blue)", width: "70%",}}>{name}</Title>
+                    <div className="me-2" style={{display: "block", textAlign: "right", width: "30%", }}>
+                        <Price className="mb-0">{PriceFormatter(price)}</Price>
+                        <StockAmount>Stock: {stock}</StockAmount>
+                    </div>
                 </div>
             </Card>
         </Link>
