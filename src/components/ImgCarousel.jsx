@@ -1,15 +1,15 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
-import ShoeImg1  from '../assets/image-product-1.jpg';
-import ShoeImg2 from '../assets/image-product-2.jpg';
-import ShoeImg3 from '../assets/image-product-3.jpg';
-import ShoeImg4 from '../assets/image-product-4.jpg';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 
-export default function ImgCarousel() {
+export default function ImgCarousel(photos) {
 
-    const ShoePhotos = [ShoeImg1, ShoeImg2, ShoeImg3, ShoeImg4];
+    const ShoePhotos = [];
+
+    photos.photos.forEach((photo) => {
+        ShoePhotos.push(photo);
+    });
 
     return (
     <Carousel

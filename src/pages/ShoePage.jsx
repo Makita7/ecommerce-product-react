@@ -38,7 +38,7 @@ export default function ShoePage() {
         <>
             {!product ? <p>not found</p> :
             <>
-                <ImgCarousel/>
+                <ImgCarousel photos={product.photos} />
                 <div className='m-4'>
                     <Subtitle>sneaker company</Subtitle>
                     <Title>{product.name}</Title>
