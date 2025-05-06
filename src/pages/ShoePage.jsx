@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import ImgCarousel from '../components/ImgCarousel';
-import { useShopStore } from '../store/store';
+import { useShopStore, getDiscountedAmount } from '../store/store';
 import { useParams } from 'react-router-dom';
 import cartIcon from '../assets/icon-cart-darkGrey.svg';
 
@@ -28,7 +28,11 @@ export default function ShoePage() {
             setAmount(amount - 1)
         }
     };
-    const increment = () => setAmount(amount + 1);
+    const increment = () => {
+        if(amount < product.stock){
+            setAmount(amount + 1)
+        }
+    };
 
     return (
         <>
@@ -38,13 +42,13 @@ export default function ShoePage() {
                 <div className='m-4'>
                     <Subtitle>sneaker company</Subtitle>
                     <Title>{product.name}</Title>
-                    <GeneralText>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</GeneralText>
+                    <GeneralText>{product.detail}</GeneralText>
                     <div className="d-flex justify-content-between mb-4 mt-2 align-items-center">
                         <div className='d-flex align-items-center'>
-                            <Price className='me-4 mb-0'>{PriceFormatter(125.00)}</Price>
-                            <Discount>50%</Discount>
+                            <Price className='me-4 mb-0'>{PriceFormatter(product.price)}</Price>
+                            <Discount>{product.discount}%</Discount>
                         </div>
-                        <AmountDiscounted>{PriceFormatter(250)}</AmountDiscounted>
+                        <AmountDiscounted>{PriceFormatter(getDiscountedAmount(product.price,product.discount))}</AmountDiscounted>
                     </div>
 
                     <div className='d-flex align-items-center justify-content-between mb-2' style={{backgroundColor: '#f7f8fd'}}>
@@ -97,4 +101,4 @@ const AmountDiscounted = styled.p`
     text-decoration: line-through;
     font-weight: bold;
     color: var(--dark-grayish-blue);
-    `
+`
