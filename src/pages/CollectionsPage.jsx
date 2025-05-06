@@ -1,5 +1,5 @@
 import { useShopStore } from '../store/store';
-import ShoeCard from '../components/ShoeCard';
+import CollectionCard from '../components/CollectionCard';
 
 export default function CollectionsPage() {
 
@@ -8,7 +8,7 @@ export default function CollectionsPage() {
     return (
         <>
             {products.map((product, index) => (
-                <ShoeCard key={index} data={product.name} />
+                <CollectionCard key={index} name={product.name} price={product.price} id={product.id} />
             ))}
         </>
     )

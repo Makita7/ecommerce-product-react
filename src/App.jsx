@@ -7,6 +7,7 @@ import MenPage from './pages/MenPage';
 import WomenPage from './pages/WomenPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import ShoePage from './pages/ShoePage';
 
 
 function App() {
@@ -16,8 +17,9 @@ function App() {
       <BrowserRouter>
         <Navbar/>
         <Routes >
-          <Route path="/" element={<CollectionsPage />} />
-          <Route path='men' element={<MenPage />} />
+          <Route path='/' element={<CollectionsPage />} />
+          <Route path={'/product/:prodId'} element={<ShoePage/>} />
+          <Route path='/men' element={<MenPage />} />
           <Route path='/women' element={<WomenPage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/contact' element={<ContactPage />} />
