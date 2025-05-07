@@ -1,4 +1,3 @@
-@import './custom.scss';
 
 body{
   margin: 0;
@@ -24,4 +23,21 @@ body{
   font-size: 2rem;
   padding: 0.5rem;
   opacity: 1;
+}
+
+.btn-orange {
+  background-color: var(--orange);
+  color: white;
+  font-weight: bold;
+  padding: 0.8rem 0;
+  width: 100%;
+  border: none;
+}
+
+.btn-orange:hover {
+  background-color: hsl(26, 100%, 46%);
+}
+
+.btn-orange:active {
+  background-color: hsl(26deg 100% 40.23%);
 }

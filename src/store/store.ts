@@ -24,14 +24,18 @@ import Sneaker9Two from '../assets/Sneaker-Nine2.jpg';
 interface Product {
     id: number,
     name: string,
+    detail: string,
     price: number,
     stock: number,
     discount: number,
+    gender: 'men' | 'women' | 'unisex',
     photos: string[],
 }
 
 interface CartItem {
     productId: number,
+    name: string,
+    price: number,
     quantity: number,
 }
 
@@ -151,4 +155,8 @@ export const getDiscountedAmount = (price: number, discount:number) =>{
 
 export const getProdById = (id: number) => {
     return useShopStore.getState().products.find((product) => product.id === id);
+}
+
+export const getMensShoes = () => {
+    return useShopStore.getState().products.filter((product) => product.gender === "men");
 }
