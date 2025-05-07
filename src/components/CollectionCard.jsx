@@ -1,7 +1,6 @@
 
 import { PriceFormatter } from "../store/store";
 import { Link } from 'react-router-dom';
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { StockAmount } from "../pages/ShoePage";
 

@@ -67,14 +67,14 @@ export default function ShoePage() {
     )
 }
 
-const Subtitle = styled.p`
+export const Subtitle = styled.p`
     font-size: 0.8rem;
     font-weight: 500;
     color: var(--dark-grayish-blue);
     text-transform: uppercase;
 `
 
-const Title = styled.p`
+export const Title = styled.p`
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.1;
