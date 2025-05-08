@@ -6,14 +6,14 @@ import { OverlayStyle } from "./Navbar";
 import { Button } from 'react-bootstrap';
 import { useShopStore } from "../store/store";
 import DeleteIcon from "../assets/icon-delete.svg";
-import thumbnail from "../assets/image-product-1-thumbnail.jpg";
+import { FaCreditCard } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 
 
 export default function CartDialog() {
 
     const [isCartToggle, setIsCartToggle] = useState(false);
     const cart = useShopStore((state) => state.cart);
-    const products = useShopStore((state) => state.products);
 
     const ToggleCart = () => setIsCartToggle(!isCartToggle);
 
@@ -22,9 +22,14 @@ export default function CartDialog() {
         ToggleCart();
     };
 
+    const TotalAmountPerProd = (price, amount) => {
+        return price * amount;
+    }
+
     return (
         <>
-            <img onClick={ToggleCart} src={CartIcon} style={{margin: "auto"}} alt='shopping cart button' />
+            {/* <img onClick={ToggleCart} src={CartIcon} style={{margin: "auto"}} alt='shopping cart button' /> */}
+            <FaCartShopping onClick={ToggleCart} className='me-2' style={{ fontSize: "1.4rem", color: "#69707d", marginTop: "auto", marginBottom: "auto"}}/>
             { isCartToggle &&
                 <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
                     <CartDialogStyle className='py-2 px-3'>
@@ -34,22 +39,23 @@ export default function CartDialog() {
                         </div>
                         <div style={{minHeight: "5rem",}}>
                             <hr className="my-2 mb-3" />
-                            { cart
+                            { cart && cart.length > 0
                                 ? cart.map((cart, index) => (
-                                <p key={index}>{cart}</p>
+                                    <div key={index} className="d-flex align-items-center mb-3" >
+                                        {cart.photos && <Thumbnail src={cart.photos[0]} alt="cart shoe profile photo" />}
+                                        <div className="ms-2" style={{width: "100%"}}>
+                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cart.name}</p>
+                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cart.price} x {cart.amount} = <b>$ {TotalAmountPerProd(cart.price, cart.amount)}</b></p>
+                                        </div>
+                                        <img src={DeleteIcon} alt="delete icon for product: " />
+                                    </div>
                                 ))
-                                : <p>Cart is empty...</p>
+                                : <p className="text-center">Cart is empty...</p>
                             }
-                            <div className="d-flex align-items-center mb-3" >
-                                <Thumnail src={thumbnail} alt="cart shoe profile photo" />
-                                <div className="ms-2" style={{width: "100%"}}>
-                                    <p className="mb-0" style={{color: "var(--dark-grayish-blue),"}}>Title</p>
-                                    <p className="mb-0" style={{color: "var(--dark-grayish-blue),"}}>$ Price x Amount = <b>$ Total</b></p>
-                                </div>
-                                <img src={DeleteIcon} alt="delete icon for product: " />
-                            </div>
+
                         </div>
-                        <Button onClick={Checkout} variant='primary' style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold",}} className='my-2' >
+                        <Button onClick={Checkout} variant='primary' style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold",color: "var(--very-dark-blue)"}} className='my-2 btn-orange' >
+                            <FaCreditCard className='me-2' />
                             Checkout
                         </Button>
                     </CartDialogStyle>
@@ -71,7 +77,7 @@ const CartDialogStyle = styled.div`
     border-radius: 8px;
 `
 
-const Thumnail = styled.img`
+const Thumbnail = styled.img`
     width: 3rem;
     border-radius: 4px;
 `

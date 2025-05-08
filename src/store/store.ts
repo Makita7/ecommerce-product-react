@@ -36,13 +36,13 @@ interface CartItem {
     productId: number,
     name: string,
     price: number,
-    quantity: number,
+    amount: number,
+    photos: string[],
 }
 
 interface ShopState {
     products: Product[],
     cart: CartItem[],
-    string: string,
 }
 
 export const useShopStore = create<ShopState>(() => ({
@@ -139,7 +139,6 @@ export const useShopStore = create<ShopState>(() => ({
         },
     ],
     cart: [],
-    string: "string store",
 }))
 
 export const PriceFormatter = (price:number) => {

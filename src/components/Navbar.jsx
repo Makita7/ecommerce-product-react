@@ -8,7 +8,6 @@ import ProfileIcon from '../assets/image-avatar.png';
 import CartDialog from './CartDialog';
 
 
-
 const Navbar = () => {
     const links = [
         { name:'Collections', path:'/' },
@@ -67,7 +66,7 @@ const Navbar = () => {
 
                     <div className='d-flex align-items-end'>
                         <CartDialog/>
-                        <ProfilePhoto src={ProfileIcon} alt='user profile mini photo' className='ms-4 pt-lg-2' />
+                        <ProfilePhoto src={ProfileIcon} alt='user profile mini photo' className='ms-2 pt-lg-2' />
                     </div>
                 </nav>
 
