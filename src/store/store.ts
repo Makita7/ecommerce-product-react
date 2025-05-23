@@ -43,9 +43,11 @@ interface CartItem {
 interface ShopState {
     products: Product[],
     cart: CartItem[],
+    addToCart: (item: CartItem) => void,
+    removeFromCart: (id: number) => void,
 }
 
-export const useShopStore = create<ShopState>(() => ({
+export const useShopStore = create<ShopState>((set) => ({
     products: [
         {
             id: 1,
@@ -139,7 +141,15 @@ export const useShopStore = create<ShopState>(() => ({
         },
     ],
     cart: [],
-}))
+
+    addToCart: (item) => set((state) => ({
+        cart: [...state.cart, item]
+    })),
+
+    removeFromCart: (id:number) => set((state) => ({
+        cart: state.cart.filter((item) => item.productId !== id),
+    })),
+}));
 
 export const PriceFormatter = (price:number) => {
     return new Intl.NumberFormat('en-US', {

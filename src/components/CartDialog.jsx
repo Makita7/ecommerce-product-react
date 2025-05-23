@@ -1,21 +1,21 @@
 import { useState } from "react";
+import { useShopStore } from "../store/store";
 import styled from "styled-components";
-import CartIcon from '../assets/icon-cart.svg';
 import closeIcon from '../assets/icon-close.svg';
 import { OverlayStyle } from "./Navbar";
 import { Button } from 'react-bootstrap';
-import { useShopStore } from "../store/store";
-import DeleteIcon from "../assets/icon-delete.svg";
-import { FaCreditCard } from "react-icons/fa";
+import { FaCreditCard, FaTrash } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 
 
 export default function CartDialog() {
 
     const [isCartToggle, setIsCartToggle] = useState(false);
-    const cart = useShopStore((state) => state.cart);
+    let cart = useShopStore((state) => state.cart);
 
     const ToggleCart = () => setIsCartToggle(!isCartToggle);
+
+    const removeFromCart = useShopStore((state) => state.removeFromCart);
 
     const Checkout = () => {
         console.log("Checkout");
@@ -28,7 +28,6 @@ export default function CartDialog() {
 
     return (
         <>
-            {/* <img onClick={ToggleCart} src={CartIcon} style={{margin: "auto"}} alt='shopping cart button' /> */}
             <FaCartShopping onClick={ToggleCart} className='me-2' style={{ fontSize: "1.4rem", color: "#69707d", marginTop: "auto", marginBottom: "auto"}}/>
             { isCartToggle &&
                 <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
@@ -40,14 +39,14 @@ export default function CartDialog() {
                         <div style={{minHeight: "5rem",}}>
                             <hr className="my-2 mb-3" />
                             { cart && cart.length > 0
-                                ? cart.map((cart, index) => (
+                                ? cart.map((cartItem, index) => (
                                     <div key={index} className="d-flex align-items-center mb-3" >
-                                        {cart.photos && <Thumbnail src={cart.photos[0]} alt="cart shoe profile photo" />}
+                                        {cartItem.photos && <Thumbnail src={cartItem.photos[0]} alt="cart shoe profile photo" />}
                                         <div className="ms-2" style={{width: "100%"}}>
-                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cart.name}</p>
-                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cart.price} x {cart.amount} = <b>$ {TotalAmountPerProd(cart.price, cart.amount)}</b></p>
+                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cartItem.name}</p>
+                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cartItem.price} x {cartItem.amount} = <b>$ {TotalAmountPerProd(cartItem.price, cartItem.amount)}</b></p>
                                         </div>
-                                        <img src={DeleteIcon} alt="delete icon for product: " />
+                                        <FaTrash onClick={() => removeFromCart(cartItem.productId)} color="grey" className="me-2" />
                                     </div>
                                 ))
                                 : <p className="text-center">Cart is empty...</p>

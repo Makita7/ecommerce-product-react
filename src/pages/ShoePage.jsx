@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import ImgCarousel from '../components/ImgCarousel';
 import { useShopStore, getDiscountedAmount } from '../store/store';
 import { useParams } from 'react-router-dom';
-import cartIcon from '../assets/icon-cart-darkGrey.svg';
 import { FaCartShopping } from 'react-icons/fa6';
 
 export default function ShoePage() {
@@ -37,13 +36,14 @@ export default function ShoePage() {
 
     const AddToCart = (prodId, name, price, amount)  =>{
         if(amount !== 0){
-            console.log("add to cart", prodId, name, price, amount);
+            console.log("add to cart", Number(prodId), name, price, amount);
+
             useShopStore.setState((state) => ({
                 cart: [...state.cart, {prodId, name, price, amount}]
             }))
             useShopStore.setState((state) => ({
                 products: state.products.map((product) => {
-                    if (product.id === prodId) {
+                    if (product.productId === prodId) {
                         return { ...product, stock: product.stock - amount };
                     }
                     return product;
@@ -76,8 +76,7 @@ export default function ShoePage() {
                         <p className='mb-0' style={{fontWeight: "bold", fontSize: "1.5rem"}}>{amount}</p>
                         <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={increment}>+</Button>
                     </div>
-                    <Button onClick={() => AddToCart(prodId, product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className='my-2 btn-orange' >
-                        {/* <img src={cartIcon} alt='shop cart icon' style={{width: "1.4rem"}} className='mx-2' /> */}
+                    <Button onClick={() => AddToCart(Number(prodId), product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className='my-2 btn-orange' >
                         <FaCartShopping className='me-2' />
                         Add to Cart
                     </Button>
