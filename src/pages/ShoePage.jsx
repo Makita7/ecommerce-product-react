@@ -9,6 +9,7 @@ import { FaCartShopping } from 'react-icons/fa6';
 export default function ShoePage() {
 
     const { prodId } = useParams();
+    const addToCart = useShopStore((state) => state.addToCart);
 
     const product = useShopStore((
         (state) => state.products.find((product) => Number(product.id) === Number(prodId))
@@ -35,22 +36,38 @@ export default function ShoePage() {
     };
 
     const AddToCart = (prodId, name, price, amount)  =>{
-        if(amount !== 0){
-            console.log("add to cart", Number(prodId), name, price, amount);
+        if(amount !== 0 && product.stock >= amount){
+            let cartCopy = [...useShopStore.getState().cart];
+            let productsCopy = [...useShopStore.getState().products];
+            const productindex = productsCopy.findIndex((item) => item.id === prodId);
+            const cartIndex = cartCopy.findIndex((item) => item.productId === prodId);
 
-            useShopStore.setState((state) => ({
-                cart: [...state.cart, {prodId, name, price, amount}]
-            }))
-            useShopStore.setState((state) => ({
-                products: state.products.map((product) => {
-                    if (product.productId === prodId) {
-                        return { ...product, stock: product.stock - amount };
-                    }
-                    return product;
-                }),
-            }));
+
+            if(productindex !== -1){
+                productsCopy[productindex].stock -= amount;
+                if(cartIndex !== -1){
+                    console.log(amount, product.stock);
+                    cartCopy[cartIndex].amount += amount;
+                }else{
+                    console.log("adding to cart");
+                    cartCopy.push({
+                        productId: prodId,
+                        name: name,
+                        price: price,
+                        amount: amount,
+                        photos: product.photos
+                    });
+                }
+            }
+            addToCart(cartCopy, productsCopy);
+            console.log(cartCopy, productsCopy);
+            setAmount(0);
         }
     }
+
+    const handleAdd = (prodId, name, price, amount) => {
+        AddToCart(prodId, name, price, amount);
+    };
 
 
     return (
@@ -76,7 +93,7 @@ export default function ShoePage() {
                         <p className='mb-0' style={{fontWeight: "bold", fontSize: "1.5rem"}}>{amount}</p>
                         <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={increment}>+</Button>
                     </div>
-                    <Button onClick={() => AddToCart(Number(prodId), product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className='my-2 btn-orange' >
+                    <Button onClick={() => handleAdd(Number(prodId), product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className='my-2 btn-orange' >
                         <FaCartShopping className='me-2' />
                         Add to Cart
                     </Button>

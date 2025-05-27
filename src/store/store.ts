@@ -141,15 +141,48 @@ export const useShopStore = create<ShopState>((set) => ({
         },
     ],
     cart: [],
-
-    addToCart: (item) => set((state) => ({
-        cart: [...state.cart, item]
+    addToCart: (newCart, newProducts) => set(() => ({
+        cart: newCart,
+        products: newProducts,
     })),
+    removeFromCart: (productId) => set((state) => {
+        const productIndex = state.products.findIndex(p => p.id === productId);
+        const cartItemIndex = state.cart.findIndex(c => c.productId === productId);
 
-    removeFromCart: (id:number) => set((state) => ({
-        cart: state.cart.filter((item) => item.productId !== id),
-    })),
+        if (productIndex === -1 || cartItemIndex === -1) return state; // not found
+
+        const updatedCart = [...state.cart];
+        const item = updatedCart[cartItemIndex];
+
+        if (item.amount > 1) {
+            updatedCart[cartItemIndex] = {
+                ...item,
+                amount: item.amount - 1,
+            };
+        } else {
+            updatedCart.splice(cartItemIndex, 1);
+        }
+
+        const updatedProducts = [...state.products];
+        updatedProducts[productIndex] = {
+            ...updatedProducts[productIndex],
+            stock: updatedProducts[productIndex].stock + 1,
+        };
+
+        return {
+            cart: updatedCart,
+            products: updatedProducts,
+        };
+    }),
 }));
+
+    // addToCart: (item) => set((state) => ({
+    //     cart: [...state.cart, item]
+    // })),
+
+    // removeFromCart: (id:number) => set((state) => ({
+    //     cart: state.cart.filter((item) => item.productId !== id),
+    // })),
 
 export const PriceFormatter = (price:number) => {
     return new Intl.NumberFormat('en-US', {
