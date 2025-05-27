@@ -79,7 +79,7 @@ export default function ShoePage() {
                     <Subtitle>sneaker company</Subtitle>
                     <Title>{product.name}</Title>
                     <GeneralText>{product.detail}</GeneralText>
-                    <div className="d-flex justify-content-between mb-4 mt-2 align-items-center">
+                    <div className="d-flex justify-content-between justify-content-lg-start mb-4 mt-2 align-items-center">
                         <div className='d-flex align-items-center'>
                             <Price className='me-4 mb-0'>{PriceFormatter(product.price)}</Price>
                             { product.discount > 0 && <Discount>{product.discount}%</Discount>}
@@ -88,15 +88,17 @@ export default function ShoePage() {
                         <StockAmount>Stock: {product.stock}</StockAmount>
                     </div>
 
-                    <div className='d-flex align-items-center justify-content-between mb-2' style={{backgroundColor: '#f7f8fd'}}>
-                        <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={decrement}>-</Button>
-                        <p className='mb-0' style={{fontWeight: "bold", fontSize: "1.5rem"}}>{amount}</p>
-                        <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={increment}>+</Button>
+                    <div className="d-md-flex">
+                        <div className='d-flex align-items-center justify-content-between mb-2 btn-big-fix' style={{backgroundColor: '#f7f8fd'}}>
+                            <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={decrement}>-</Button>
+                            <p className='mb-0' style={{fontWeight: "bold", fontSize: "1.5rem"}}>{amount}</p>
+                            <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={increment}>+</Button>
+                        </div>
+                        <Button onClick={() => handleAdd(Number(prodId), product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{ padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className="my-2 btn-orange btn-big-fix" disabled={product.stock === 0}>
+                            <FaCartShopping className='me-2' />
+                            Add to Cart
+                        </Button>
                     </div>
-                    <Button onClick={() => handleAdd(Number(prodId), product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className="my-2 btn-orange" disabled={product.stock === 0}>
-                        <FaCartShopping className='me-2' />
-                        Add to Cart
-                    </Button>
                 </div>
             </div>}
         </>
@@ -114,6 +116,9 @@ export const Title = styled.p`
     font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.1;
+    @media (min-width: 1280px) {
+        font-size: 2.5rem;
+    }
 `
 const GeneralText = styled.p`
     color: var(--dark-grayish-blue);
@@ -138,10 +143,16 @@ const AmountDiscounted = styled.p`
     text-decoration: line-through;
     font-weight: bold;
     color: var(--dark-grayish-blue);
+    @media (min-width: 1280px) {
+        margin-left: 1rem;
+    }
 `
 
 export const StockAmount = styled.p`
     margin: 0;
     font-weight: bold;
     color: var(--dark-grayish-blue);
+    @media (min-width: 1280px) {
+        margin-left: 1rem;
+    }
 `

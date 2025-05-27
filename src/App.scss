@@ -42,6 +42,13 @@ body{
   background-color: hsl(26deg 100% 40.23%);
 }
 
+.btn-big-fix{
+  width: 100%;
+  @media (min-width: 1280px) {
+    width: 40% !important;
+  }
+}
+
 .tabletNavFix{
   @media (min-width: 700px) and (orientation: landscape) {
     padding: 0.5rem 1rem 0 1rem;
