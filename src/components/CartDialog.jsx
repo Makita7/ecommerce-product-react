@@ -42,7 +42,7 @@ export default function CartDialog() {
             <FaCartShopping onClick={ToggleCart} className='me-2' style={{ fontSize: "1.4rem", color: "#69707d", marginTop: "auto", marginBottom: "auto"}}/>
             { isCartToggle &&
                 <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
-                    <CartDialogStyle className='py-2 px-3'>
+                    <CartDialogStyle className={`py-2 px-3 ${isCartToggle ? 'fadeIn' : 'fadeOut'}`}>
                         <div className="d-flex align-items-center justify-content-between">
                             <p style={{fontWeight: "bold", color: "var(--very-dark-blue)", fontSize: "1.2rem",}} className="mb-0">Cart</p>
                             <img onClick={ToggleCart} src={closeIcon} alt='navbar close button' aria-label='close button' style={{width: "1.2rem"}} className='ms-2' />
@@ -73,7 +73,7 @@ export default function CartDialog() {
             }
             { isThanksToggle &&
                 <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
-                    <ThanksDialogStyle className='py-2 px-3'>
+                    <ThanksDialogStyle className={`py-2 px-3 ${isThanksToggle ? 'fadeIn' : 'fadeOut'}`}>
                         <div className="d-flex align-items-center justify-content-between">
                             <p style={{fontWeight: "bold", color: "hsl(26deg 100% 38.66%)", fontSize: "1.2rem", margin: "auto"}} className="mb-0 mt-2 text-center">Thank You!!</p>
                         </div>
