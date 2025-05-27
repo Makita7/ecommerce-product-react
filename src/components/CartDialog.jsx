@@ -32,9 +32,19 @@ export default function CartDialog() {
         ToggleCart();
     };
 
+    const PriceFormatter = (price) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(price);
+    }
 
     const TotalAmountPerProd = (price, amount) => {
         return price * amount;
+    }
+
+    const TotalAmount = () => {
+        return cart.reduce((total, item) => total + (item.price * item.amount), 0);
     }
 
     return (
@@ -55,7 +65,7 @@ export default function CartDialog() {
                                         {cartItem.photos && <Thumbnail src={cartItem.photos[0]} alt="cart shoe profile photo" />}
                                         <div className="ms-2" style={{width: "100%"}}>
                                             <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cartItem.name}</p>
-                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{cartItem.price} x {cartItem.amount} = <b>$ {TotalAmountPerProd(cartItem.price, cartItem.amount)}</b></p>
+                                            <p className="mb-0" style={{color: "var(--dark-grayish-blue)"}}>{PriceFormatter(cartItem.price)} x {cartItem.amount} = <b>{PriceFormatter(TotalAmountPerProd(cartItem.price, cartItem.amount))}</b></p>
                                         </div>
                                         <FaTrash onClick={() => removeFromCart(cartItem.productId)} color="grey" className="me-2" />
                                     </div>
@@ -63,6 +73,9 @@ export default function CartDialog() {
                                 : <p className="text-center">Cart is empty...</p>
                             }
 
+                        </div>
+                        <div className="d-flex text-right justify-content-end">
+                            <TotalText>Total: <b>{PriceFormatter(TotalAmount())}</b></TotalText>
                         </div>
                         <Button onClick={Checkout} variant='primary' style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold",color: "var(--very-dark-blue)"}} className='my-2 btn-orange' >
                             <FaCreditCard className='me-2' />
@@ -130,4 +143,9 @@ const ThanksDialogStyle = styled.div`
 const Thumbnail = styled.img`
     width: 3rem;
     border-radius: 4px;
+`
+
+const TotalText = styled.p`
+    font-size: 1.4rem;
+    color: var(--very-dark-blue);
 `
