@@ -148,30 +148,21 @@ export const useShopStore = create<ShopState>((set) => ({
     removeFromCart: (productId) => set((state) => {
         const productIndex = state.products.findIndex(p => p.id === productId);
         const cartItemIndex = state.cart.findIndex(c => c.productId === productId);
+        const cartCopy = [...state.cart];
+        const productsCopy = [...state.products];
 
-        if (productIndex === -1 || cartItemIndex === -1) return state; // not found
-
-        const updatedCart = [...state.cart];
-        const item = updatedCart[cartItemIndex];
-
-        if (item.amount > 1) {
-            updatedCart[cartItemIndex] = {
-                ...item,
-                amount: item.amount - 1,
+        if (productIndex !== -1 || cartItemIndex !== -1){
+            const stockReturned = cartCopy[cartItemIndex].amount
+            productsCopy[productIndex] = {
+                ...productsCopy[productIndex],
+                stock: productsCopy[productIndex].stock + stockReturned,
             };
-        } else {
-            updatedCart.splice(cartItemIndex, 1);
         }
-
-        const updatedProducts = [...state.products];
-        updatedProducts[productIndex] = {
-            ...updatedProducts[productIndex],
-            stock: updatedProducts[productIndex].stock + 1,
-        };
+            cartCopy.splice(cartItemIndex, 1);
 
         return {
-            cart: updatedCart,
-            products: updatedProducts,
+            cart: cartCopy,
+            products: productsCopy,
         };
     }),
 }));
