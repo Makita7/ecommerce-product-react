@@ -73,9 +73,9 @@ export default function ShoePage() {
     return (
         <>
             {!product ? <p>not found</p> :
-            <>
+            <div className='d-md-flex align-items-md-center'>
                 <ImgCarousel photos={product.photos} />
-                <div className='m-4'>
+                <div className='m-4 col-md-6'>
                     <Subtitle>sneaker company</Subtitle>
                     <Title>{product.name}</Title>
                     <GeneralText>{product.detail}</GeneralText>
@@ -98,7 +98,7 @@ export default function ShoePage() {
                         Add to Cart
                     </Button>
                 </div>
-            </>}
+            </div>}
         </>
     )
 }

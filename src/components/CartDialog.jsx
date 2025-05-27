@@ -84,6 +84,15 @@ export default function CartDialog() {
     )
 }
 
+const device = {
+    xs: '400px',
+    sm: '600px',
+    md: '900px',
+    lg: '1280px',
+    xl: '1440px',
+    xxl: '1920px',
+}
+
 const CartDialogStyle = styled.div`
     position: absolute;
     box-shadow: 0px 7px 8px #00000052;
@@ -94,6 +103,11 @@ const CartDialogStyle = styled.div`
     top: 3%;
     left: 5%;
     border-radius: 8px;
+    @media (min-width: ${device.sm}) {
+        width: 30rem;
+        left: auto;
+        right: 3%;
+    }
 `
 
 const ThanksDialogStyle = styled.div`

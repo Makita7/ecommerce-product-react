@@ -4,7 +4,7 @@ import img from "../assets/about-bg.jpg"
 
 export default function AboutPage() {
     return (
-        <DivBg className="p-4">
+        <DivBg className="p-4 p-md-5">
             <Title style={{fontSize: "1.5rem"}} className="mb-2 px-3" >Welcome to Stride & Style,</Title>
             <AboutText className="text-justify"> your go-to destination for high-quality, stylish, and performance-driven sneakers. Founded with a passion for movement and design, our mission is to bring you footwear that feels as good as it looks—whether you're hitting the pavement, heading to the office, or just living life on the go.
 

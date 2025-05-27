@@ -42,6 +42,36 @@ body{
   background-color: hsl(26deg 100% 40.23%);
 }
 
+.tabletNavFix{
+  @media (min-width: 700px) and (orientation: landscape) {
+    padding: 0.5rem 1rem 0 1rem;
+  }
+}
+
+.navfix{
+  @media (min-width: 600px) {
+    margin-bottom: -0.5rem;
+  }
+}
+
+// Navigation Link styles for md and bigger
+.navActiveStyle {
+  text-decoration: none;
+  color: black;
+  padding-bottom: 4px;
+}
+
+.navActiveStyle:hover {
+  border-bottom: 2px solid #aaa; /* lighter color on hover */
+}
+
+.navActiveStyle.active {
+  border-bottom: 2px solid black;
+}
+
+
+
+// ANIMATIONS
 .fadeIn{
   animation: fadingIn 0.4s ease-in-out;
 }
@@ -71,3 +101,4 @@ body{
     visibility: hidden;
   }
 }
+

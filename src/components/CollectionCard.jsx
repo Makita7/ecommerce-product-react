@@ -22,12 +22,24 @@ export default function CollectionCard({name, price, stock, id, img}) {
     )
 }
 
+const device = {
+    xs: '400px',
+    sm: '600px',
+    md: '900px',
+    lg: '1280px',
+    xl: '1440px',
+    xxl: '1920px',
+}
+
 const Card = styled.div`
     width: 90%;
     background-color: white;
     border-radius: 8px;
     padding: 0.5rem 1rem;
     margin: 0.8rem 1rem;
+    @media (min-width: ${device.sm}) {
+        width: 20rem;
+    }
 `
 
 const Title = styled.p`

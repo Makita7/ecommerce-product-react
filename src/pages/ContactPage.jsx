@@ -57,4 +57,8 @@ const ImgBg = styled.img`
     width: 170%;
     opacity: 0.8;
     animation: ${rotate360} 25s linear infinite;
+    z-index: -3;
+    @media (min-width: 700px) and (orientation: landscape) {
+        bottom: -140%;
+    }
 `

@@ -34,8 +34,8 @@ const Navbar = () => {
 
     const NavbarItem = (link, index) =>{
         return(
-            <Link to={link.path || '/'} key={index} className='text-decoration-none'>
-                <p className='ps-2 mb-0' style={{color: "var(--very-dark-blue)"}} key={index} >{link.name}</p>
+            <Link to={link.path || '/'} key={index} className='text-decoration-none' style={{borderBottom: "var(--orange) solid 2px;",}}>
+                <p className="ms-2 mb-0 navActiveStyle" style={{color: "var(--very-dark-blue)"}} key={index} >{link.name}</p>
             </Link>
         )
     }
@@ -50,14 +50,14 @@ const Navbar = () => {
 
         return (
             <>
-                <nav className='d-flex align-items-center justify-content-between navbar mx-4 my-2 mx-lg-0 my-lg-0'>
+                <nav className='d-flex align-items-center justify-content-between navbar mx-4 my-2 mx-lg-0 my-lg-0 tabletNavFix'>
                     <div className='d-flex align-items-center'>
                         { isMobile && <MenuIcon onClick={toggleMenu} src={NavBurgerIcon} alt='navigation menu button' className='me-2' /> }
 
                         <Link to='/' className='text-decoration-none'>
                             <img src={Logo} alt='sneakers store logo' className='ms-2 m-lg-0' />
                         </Link>
-                        <div className='d-flex align-items-center ms-2'>
+                        <div className='d-flex align-items-center ms-2 navfix'>
                             { !isMobile && links.map((link, index) => (
                                 NavbarItem(link, index)
                             ))}
