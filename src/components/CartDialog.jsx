@@ -11,16 +11,27 @@ import { FaCartShopping } from "react-icons/fa6";
 export default function CartDialog() {
 
     const [isCartToggle, setIsCartToggle] = useState(false);
+    const [isThanksToggle, setIsThanksToggle] = useState(false);
     let cart = useShopStore((state) => state.cart);
+    const CheckoutMethod = useShopStore(state => state.checkoutMethod);
 
     const ToggleCart = () => setIsCartToggle(!isCartToggle);
 
     const removeFromCart = useShopStore((state) => state.removeFromCart);
 
+    const ThanksMessage = () => {
+        setIsThanksToggle(true);
+        setTimeout(() => {
+            setIsThanksToggle(false);
+        }, 2000);
+    };
+
     const Checkout = () => {
-        console.log("Checkout");
+        CheckoutMethod();
+        ThanksMessage();
         ToggleCart();
     };
+
 
     const TotalAmountPerProd = (price, amount) => {
         return price * amount;
@@ -60,6 +71,15 @@ export default function CartDialog() {
                     </CartDialogStyle>
                 </OverlayStyle>
             }
+            { isThanksToggle &&
+                <OverlayStyle className={`inset-0 d-flex justify-content-center align-items-center`}>
+                    <ThanksDialogStyle className='py-2 px-3'>
+                        <div className="d-flex align-items-center justify-content-between">
+                            <p style={{fontWeight: "bold", color: "hsl(26deg 100% 38.66%)", fontSize: "1.2rem", margin: "auto"}} className="mb-0 mt-2 text-center">Thank You!!</p>
+                        </div>
+                    </ThanksDialogStyle>
+                </OverlayStyle>
+            }
         </>
     )
 }
@@ -70,6 +90,18 @@ const CartDialogStyle = styled.div`
     background-color: white;
     height: auto;
     min-height: 30%;
+    width: 90%;
+    top: 3%;
+    left: 5%;
+    border-radius: 8px;
+`
+
+const ThanksDialogStyle = styled.div`
+    position: absolute;
+    box-shadow: 0px 7px 8px #00000052;
+    background-color: white;
+    height: auto;
+    min-height: 10%;
     width: 90%;
     top: 3%;
     left: 5%;

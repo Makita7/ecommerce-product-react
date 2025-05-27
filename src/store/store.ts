@@ -165,15 +165,10 @@ export const useShopStore = create<ShopState>((set) => ({
             products: productsCopy,
         };
     }),
+    checkoutMethod: () => {
+        set({ cart: [] });
+    },
 }));
-
-    // addToCart: (item) => set((state) => ({
-    //     cart: [...state.cart, item]
-    // })),
-
-    // removeFromCart: (id:number) => set((state) => ({
-    //     cart: state.cart.filter((item) => item.productId !== id),
-    // })),
 
 export const PriceFormatter = (price:number) => {
     return new Intl.NumberFormat('en-US', {
