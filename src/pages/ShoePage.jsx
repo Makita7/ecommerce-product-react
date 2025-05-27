@@ -93,7 +93,7 @@ export default function ShoePage() {
                         <p className='mb-0' style={{fontWeight: "bold", fontSize: "1.5rem"}}>{amount}</p>
                         <Button variant='light' style={{width: "33%", fontWeight: "bold", fontSize: "1.5rem", color: "#ff7d1b"}} onClick={increment}>+</Button>
                     </div>
-                    <Button onClick={() => handleAdd(Number(prodId), product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className='my-2 btn-orange' >
+                    <Button onClick={() => handleAdd(Number(prodId), product.name, getDiscountedAmount(product.price, product.discount), amount, product.photos )} style={{width: '100%', padding: "0.8rem 0", fontWeight: "bold", color: "var(--very-dark-blue)"}} className="my-2 btn-orange" disabled={product.stock === 0}>
                         <FaCartShopping className='me-2' />
                         Add to Cart
                     </Button>
