@@ -8,7 +8,7 @@ import { AboutText as DivBg } from './AboutPage';
 export default function ContactPage() {
     return (
         <div className='m-4' style={{position: "relative"}}>
-            <DivBg style={{zIndex: "+5", position: "absolute"}}>
+            <DivBg style={{zIndex: "+5", position: "absolute"}} className='contactLgFix'>
                 <Title style={{fontSize: "1.5rem"}}>Contact Us</Title>
                 <div className='mb-4'>
                     <Subtitle style={{fontSize: "1rem"}} className='mb-0'> <FaLocationDot/> Headquarters</Subtitle>
@@ -41,6 +41,15 @@ export default function ContactPage() {
     )
 }
 
+const device = {
+    xs: '400px',
+    sm: '600px',
+    md: '900px',
+    lg: '1280px',
+    xl: '1440px',
+    xxl: '1920px',
+}
+
 const rotate360 = keyframes`
     from {
         transform: rotate(0deg);
@@ -60,5 +69,10 @@ const ImgBg = styled.img`
     z-index: -3;
     @media (min-width: 700px) and (orientation: landscape) {
         bottom: -140%;
+    }
+    @media (min-width: ${device.lg}) and (orientation: landscape) {
+        bottom: -86%;
+        right: -40%;
+        width: 80%;
     }
 `

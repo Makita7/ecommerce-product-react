@@ -120,6 +120,11 @@ const ThanksDialogStyle = styled.div`
     top: 3%;
     left: 5%;
     border-radius: 8px;
+    @media (min-width: ${device.sm}) {
+        width: 30rem;
+        left: auto;
+        right: 3%;
+    }
 `
 
 const Thumbnail = styled.img`

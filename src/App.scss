@@ -54,6 +54,13 @@ body{
   }
 }
 
+.contactLgFix{
+    @media (min-width: 1280px) {
+          left: 40%;
+          text-align: center;
+    }
+}
+
 // Navigation Link styles for md and bigger
 .navActiveStyle {
   text-decoration: none;
